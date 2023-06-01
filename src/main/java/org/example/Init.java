@@ -13,7 +13,6 @@ public class Init {
         Integer amount_yellow = 1;
         Integer amount_purple = 1;
         Board board = new Board(width, height);
-        //String[] tribeTypes = {"black", "white"};
         Map<String, Integer> tribeTypes = new HashMap();
         tribeTypes.put("black", amount_black);
         tribeTypes.put("white", amount_white);
@@ -35,11 +34,9 @@ public class Init {
         board.displayBoard();
         System.out.println();
         //przesuwanie obiektów
-
-        List<Position> repPositions = new ArrayList<>(); //lista powtarzających się pozycji
-        List<Position> usedPositions = new ArrayList<>();//lista pozycji
-        Board updatedBoard = null;
-        for (int i = 0; i < 1; i++) {
+        Board updatedBoard; //tymczasowa mapa
+        for (int i = 0; i < 3; i++) {
+            List<Position> usedPositions = new ArrayList<>();//lista pozycji
             updatedBoard = new Board(width, height);
             for (Map.Entry<Position, Tribe> entry : board.board.entrySet()) {
                 board.moveTribeTo(entry.getValue(), entry.getKey());//przesuwanie obiektów
@@ -47,36 +44,41 @@ public class Init {
                 int y = entry.getKey().y;
                 Tribe tribe = entry.getValue();
                 createTribe(tribe.name); //tworzenie nowego obiektu Tribe
-                updatedBoard.newTribe(tribe, x, y); //dodawanie obiektu Tribe z nowymi wspolrzednymi do tymczasowej mapy
-                usedPositions.add(new Position(x, y));
-            }
-            for (Position item : usedPositions) {
-                for (Position element : usedPositions) {
-                    if (item.x == element.x && item.y == element.y && usedPositions.indexOf(item) != usedPositions.lastIndexOf(element)) {
-                        if (repPositions.contains(item)) {
-                            continue;
-                        } else {
-                            List<Tribe> listOfFighters = new ArrayList<>();
-                            for (Map.Entry<Position, Tribe> entry : board.board.entrySet()) {
-                                if (item.x == entry.getValue().current_x && item.y == entry.getValue().current_y) {
-                                    listOfFighters.add(entry.getValue());
-                                }
+                Position position = new Position(x, y);
+                Tribe existingTribe = updatedBoard.board.get(position);
+                if (usedPositions.contains(position)) {
+                    if (tribe.name == existingTribe.name) {
+                        while (tribe.current_x == existingTribe.current_x && tribe.current_y == existingTribe.current_y){
+                            while (usedPositions.contains(new Position(x,y))){
+                                board.moveTribe(entry.getValue(), entry.getKey());
+                                x = entry.getKey().x;
+                                y = entry.getKey().y;
                             }
-                            repPositions.add(item);
-                            Tribe pozastanie_na_polu = updatedBoard.tribeFight(listOfFighters);
-                            System.out.println(pozastanie_na_polu.name);
+                            //existingTribe = updatedBoard.board.get(new Position(x,y));
                         }
+                        updatedBoard.newTribe(tribe, x, y);
+                        usedPositions.add(new Position(x, y));
+                    }else {
+                        List<Tribe> listOfFighters = new ArrayList<>();
+                        listOfFighters.add(tribe);
+                        listOfFighters.add(existingTribe);
+                        Tribe winner = updatedBoard.tribeFight(listOfFighters);
+                        System.out.println(winner.name);
+                        updatedBoard.board.remove(position);
+                        updatedBoard.newTribe(winner, x, y);
                     }
+                }else {
+                    usedPositions.add(position);
+                    updatedBoard.newTribe(tribe, x, y); //dodawanie obiektu Tribe z nowymi wspolrzednymi do tymczasowej mapy
                 }
             }
+            board = updatedBoard;
+            board.displayBoard();
+            System.out.println();
         }
-        for (Position item : usedPositions) {
-            System.out.println(item.x + " " + item.y);
-        }
-
-        board = updatedBoard;
-        board.displayBoard();
-        System.out.println();
+//        for (Position item : usedPositions) {
+//            System.out.println(item.x + " " + item.y);
+//        }
     }
 
 
