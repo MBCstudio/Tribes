@@ -36,7 +36,7 @@ public class Board {
         }
     }
 
-    public void moveTribeTo(Tribe tribe, Position position) {
+    public void moveTribe(Tribe tribe, Position position) {
         int random = RandInt.random(0, 2);
         if (RandInt.random(-100, 100) < 0){
             position.x -= random * tribe.multiply_speed_x;
@@ -63,10 +63,6 @@ public class Board {
         tribe.current_x = position.x;
         tribe.current_y = position.y;
     }
-//
-//    public moveTribes() {
-//        boards.forEach(tribe.Move)
-//    }
 
     public Tribe tribeFight(List<Tribe> listOfFighters){
         int choice = RandInt.random(1,4);
@@ -113,7 +109,8 @@ public class Board {
     }
 
     public void newTribe (Tribe tribe, int x, int y) {
-        Position position = new Position(x, y);
-        this.addToBoard(tribe, position);
+        tribe.current_x = x;
+        tribe.current_y = y;
+        this.board.put(new Position(x, y), tribe);
     }
 }

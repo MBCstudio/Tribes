@@ -5,13 +5,13 @@ import java.util.*;
 public class Init {
     public static void start_simulation() {
         Scanner scanner = new Scanner(System.in);
-        int width = 3;
-        int height = 3;
-        Integer amount_black = 1;
-        Integer amount_white = 1;
-        Integer amount_green = 1;
-        Integer amount_yellow = 1;
-        Integer amount_purple = 1;
+        int width = 4;
+        int height = 4;
+        Integer amount_black = 10;
+        Integer amount_white = 0;
+        Integer amount_green = 0;
+        Integer amount_yellow = 0;
+        Integer amount_purple = 0;
         Board board = new Board(width, height);
         Map<String, Integer> tribeTypes = new HashMap();
         tribeTypes.put("black", amount_black);
@@ -39,7 +39,7 @@ public class Init {
             List<Position> usedPositions = new ArrayList<>();//lista pozycji
             updatedBoard = new Board(width, height);
             for (Map.Entry<Position, Tribe> entry : board.board.entrySet()) {
-                board.moveTribeTo(entry.getValue(), entry.getKey());//przesuwanie obiektów
+                board.moveTribe(entry.getValue(), entry.getKey());//przesuwanie obiektów
                 int x = entry.getKey().x; //zapamietywanie nowych wspolrzednych
                 int y = entry.getKey().y;
                 Tribe tribe = entry.getValue();
