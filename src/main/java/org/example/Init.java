@@ -1,9 +1,10 @@
 package org.example;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class Init {
-    public static void start_simulation() {
+    public static void start_simulation() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         int width = 4;
         int height = 4;
@@ -63,9 +64,20 @@ public class Init {
                         listOfFighters.add(tribe);
                         listOfFighters.add(existingTribe);
                         Tribe winner = updatedBoard.tribeFight(listOfFighters);
-                        System.out.println(winner.name);
+                        //System.out.println(winner.name);
                         updatedBoard.board.remove(position);
                         updatedBoard.newTribe(winner, x, y);
+                        for (Tribe item : listOfFighters){
+                            if (item!=winner){
+                                switch (item.name) {
+                                    case "Black": amount_black--; break;
+                                    case "White": amount_white--; break;
+                                    case "Green": amount_green--; break;
+                                    case "Yellow": amount_yellow--; break;
+                                    case "Purple": amount_purple--; break;
+                                }
+                            }
+                        }
                     }
                 }else {
                     usedPositions.add(position);
@@ -73,12 +85,26 @@ public class Init {
                 }
             }
             board = updatedBoard;
+            frame.updateFrame(board, counter, amount_black, amount_white, amount_green, amount_yellow, amount_purple);
+            TimeUnit.MILLISECONDS.sleep(500);
             board.displayBoard();
             System.out.println();
-        }
-//        for (Position item : usedPositions) {
-//            System.out.println(item.x + " " + item.y);
-//        }
+            if (amount_black !=0){
+                tribe_counter++;
+            }
+            if (amount_purple !=0) {
+                tribe_counter++;
+            }
+            if (amount_green !=0) {
+                tribe_counter++;
+            }
+            if (amount_white !=0) {
+                tribe_counter++;
+            }
+            if (amount_yellow!=0) {
+                tribe_counter++;
+            }
+        };
     }
 
 
