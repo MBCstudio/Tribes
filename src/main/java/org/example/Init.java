@@ -6,13 +6,13 @@ import java.util.concurrent.TimeUnit;
 public class Init {
     public static void start_simulation() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
-        int width = 4;
-        int height = 4;
-        Integer amount_black = 10;
-        Integer amount_white = 0;
-        Integer amount_green = 0;
-        Integer amount_yellow = 0;
-        Integer amount_purple = 0;
+        int width = 50;
+        int height = 50;
+        Integer amount_black = 200;
+        Integer amount_white = 200;
+        Integer amount_green = 200;
+        Integer amount_yellow = 200;
+        Integer amount_purple = 200;
         Board board = new Board(width, height);
         Map<String, Integer> tribeTypes = new HashMap();
         tribeTypes.put("black", amount_black);
@@ -32,11 +32,17 @@ public class Init {
                 board.addTribe(tribe);
             }
         }
+        int counter = 0;
+        Frame frame = new Frame(board, counter, amount_black, amount_white,amount_green,amount_yellow,amount_purple);
+        frame.setSize(800,800);
         board.displayBoard();
         System.out.println();
         //przesuwanie obiektów
         Board updatedBoard; //tymczasowa mapa
-        for (int i = 0; i < 3; i++) {
+        int tribe_counter = 5;
+        while (tribe_counter > 1) {
+            tribe_counter=0;
+            counter++;
             List<Position> usedPositions = new ArrayList<>();//lista pozycji
             updatedBoard = new Board(width, height);
             for (Map.Entry<Position, Tribe> entry : board.board.entrySet()) {
