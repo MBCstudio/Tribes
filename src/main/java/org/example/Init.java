@@ -1,18 +1,20 @@
 package org.example;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Init {
     public static void start_simulation() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
-        int width = 50;
-        int height = 50;
-        Integer amount_black = 200;
-        Integer amount_white = 200;
-        Integer amount_green = 200;
-        Integer amount_yellow = 200;
-        Integer amount_purple = 200;
+        int width = Frame.COLS;
+        int height = Frame.ROWS;
+        Integer amount_black = 20;
+        Integer amount_white = 20;
+        Integer amount_green = 20;
+        Integer amount_yellow = 20;
+        Integer amount_purple = 20;
         Board board = new Board(width, height);
         Map<String, Integer> tribeTypes = new HashMap();
         tribeTypes.put("black", amount_black);
@@ -34,9 +36,11 @@ public class Init {
         }
         int counter = 0;
         Frame frame = new Frame(board, counter, amount_black, amount_white,amount_green,amount_yellow,amount_purple);
-        frame.setSize(800,800);
+        frame.setMinimumSize(new Dimension(450+width*10,300+height*10));
+        frame.setSize(450+width*11,300+height*11);
         board.displayBoard();
         System.out.println();
+        //frame.pack();
         //przesuwanie obiektów
         Board updatedBoard; //tymczasowa mapa
         int tribe_counter = 5;

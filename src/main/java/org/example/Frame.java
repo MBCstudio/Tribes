@@ -6,9 +6,10 @@ import java.awt.*;
 import java.util.Map;
 
 public class Frame extends JFrame{
-    private static final int SIZE = 10; // Rozmiar pojedynczego kwadratu (w pikselach)
-    private static final int ROWS = 50; // Liczba wierszy
-    private static final int COLS = 50; // Liczba kolumn
+    static final int SIZE = 10; // Rozmiar pojedynczego kwadratu (w pikselach)
+    static final int ROWS = 10; // Liczba wierszy
+    static final int COLS = 10; // Liczba kolumn
+
 
     private Color[][] boardColors; // Stores the color for each square
     private JLabel whiteLabel;
@@ -29,7 +30,7 @@ public class Frame extends JFrame{
         updateBoardColors(board);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBorder(new EmptyBorder(100, 100, 0, 0)); // Dodanie odstępu od góry i lewej strony
+        mainPanel.setBorder(new EmptyBorder(50, 50, 50, 50)); // Dodanie odstępu od góry i lewej strony (testuje tera jeszcze odstep z prawej i od dolu)
 
         JPanel boardPanel = new JPanel() {
             @Override
@@ -38,7 +39,7 @@ public class Frame extends JFrame{
                 drawBoard(g);
             }
         };
-        boardPanel.setPreferredSize(new Dimension(COLS * SIZE, ROWS * SIZE)); // Ustawienie preferowanego rozmiaru siatki
+        boardPanel.setPreferredSize(new Dimension(COLS * SIZE+1, ROWS * SIZE+1)); // Ustawienie preferowanego rozmiaru siatki
 
         JPanel dataPanel = new JPanel(new GridBagLayout()); // Ustawienie układu GridBagLayout dla panelu danych
 
@@ -51,37 +52,39 @@ public class Frame extends JFrame{
         gbc.gridy = 0;
         dataPanel.add(counterLabel, gbc);
 
-        whiteLabel = new JLabel("Liczba rasy Bialej: " + amount_white);
+        whiteLabel = new JLabel("Liczebnosc plemienia Bialych: " + amount_white);
         gbc.gridx = 0;
         gbc.gridy = 1;
         dataPanel.add(whiteLabel, gbc);
 
-        blackLabel = new JLabel("Liczba rasy Czarnej: " + amount_black);
+        blackLabel = new JLabel("Liczebnosc plemienia Czarnych: " + amount_black);
         gbc.gridx = 0;
         gbc.gridy = 2;
         dataPanel.add(blackLabel, gbc);
 
-        greenLabel = new JLabel("Liczba rasy Zielonej: " + amount_green);
+        greenLabel = new JLabel("Liczebnosc plemienia Zielonych: " + amount_green);
         gbc.gridx = 0;
         gbc.gridy = 3;
         dataPanel.add(greenLabel, gbc);
 
-        yellowLabel = new JLabel("Liczba rasy Zoltej: " + amount_yellow);
+        yellowLabel = new JLabel("Liczebnosc plemienia Żółtych: " + amount_yellow);
         gbc.gridx = 0;
         gbc.gridy = 4;
         dataPanel.add(yellowLabel, gbc);
 
-        purpleLabel = new JLabel("Liczba rasy Fioletowej: "+ amount_purple);
+        purpleLabel = new JLabel("Liczebnosc plemienia Fioletowych: "+ amount_purple);
         gbc.gridx = 0;
         gbc.gridy = 5;
         dataPanel.add(purpleLabel, gbc);
+
+        //whiteLabel.setFont(new Font("Calibri", Font.PLAIN, 11));
 
         mainPanel.add(boardPanel, BorderLayout.WEST);
         mainPanel.add(dataPanel, BorderLayout.EAST);
 
         add(mainPanel); // Dodanie panelu głównego do ramki
 
-        pack(); // Dopasowanie rozmiaru ramki do zawartości
+        //pack(); // Dopasowanie rozmiaru ramki do zawartości
         setVisible(true);
     }
 
@@ -113,12 +116,12 @@ public class Frame extends JFrame{
         }
     }
     private void updateData(int counter, int amount_black, int amount_white, int amount_green, int amount_yellow, int amount_purple){
-        whiteLabel.setText("Liczba rasy Bialej: " + amount_white);
+        whiteLabel.setText("Liczebnosc plemienia Bialych: " + amount_white);
         counterLabel.setText("Dlugosc symulacji: " + counter);
-        blackLabel.setText("Liczba rasy Czarnej: "+ amount_black);
-        greenLabel.setText("Liczba rasy Zielonej: "+ amount_green);
-        yellowLabel.setText("Liczba rasy Zoltej: "+ amount_yellow);
-        purpleLabel.setText("Liczba rasy Fioletowej: "+ amount_purple);
+        blackLabel.setText("Liczebnosc plemienia Czarnych: "+ amount_black);
+        greenLabel.setText("Liczebnosc plemienia Zielonych: "+ amount_green);
+        yellowLabel.setText("Liczebnosc plemienia Zoltych: "+ amount_yellow);
+        purpleLabel.setText("Liczebnosc plemienia Fioletowych: "+ amount_purple);
     }
 
 
@@ -132,6 +135,7 @@ public class Frame extends JFrame{
                 g.fillRect(x, y, SIZE, SIZE);
                 g.setColor(Color.BLACK);
                 g.drawRect(x, y, SIZE, SIZE);
+
             }
         }
     }
