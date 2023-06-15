@@ -7,8 +7,7 @@ import java.util.Map;
 
 public class Frame extends JFrame{
     static final int SIZE = 10; // Rozmiar pojedynczego kwadratu (w pikselach)
-    static final int ROWS = 10; // Liczba wierszy
-    static final int COLS = 10; // Liczba kolumn
+    static int SQUARE_LENGTH; // Liczba kolumn
 
 
     private Color[][] boardColors; // Stores the color for each square
@@ -20,13 +19,13 @@ public class Frame extends JFrame{
     private JLabel counterLabel;
 
 
-    public Frame(Board board, int counter, int amount_black, int amount_white, int amount_green, int amount_yellow, int amount_purple) {
+    public Frame(Board board, int counter, int amount_black, int amount_white, int amount_green, int amount_yellow, int amount_purple, int square_len) {
         setTitle("Plansza z kwadratami");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new GridBagLayout()); // Ustawienie układu GridBagLayout
         setResizable(true); // Ustawienie możliwości rozciągania ramki
-
-        boardColors = new Color[ROWS][COLS];
+        SQUARE_LENGTH = square_len;
+        boardColors = new Color[SQUARE_LENGTH][SQUARE_LENGTH];
         updateBoardColors(board);
 
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -39,7 +38,7 @@ public class Frame extends JFrame{
                 drawBoard(g);
             }
         };
-        boardPanel.setPreferredSize(new Dimension(COLS * SIZE+1, ROWS * SIZE+1)); // Ustawienie preferowanego rozmiaru siatki
+        boardPanel.setPreferredSize(new Dimension(SQUARE_LENGTH * SIZE+1, SQUARE_LENGTH * SIZE+1)); // Ustawienie preferowanego rozmiaru siatki
 
         JPanel dataPanel = new JPanel(new GridBagLayout()); // Ustawienie układu GridBagLayout dla panelu danych
 
@@ -96,8 +95,8 @@ public class Frame extends JFrame{
     }
 
     private void updateBoardColors(Board board) {
-        for (int i = 0; i < ROWS; i++) {
-            for (int j = 0; j < COLS; j++) {
+        for (int i = 0; i < SQUARE_LENGTH; i++) {
+            for (int j = 0; j < SQUARE_LENGTH; j++) {
                 Tribe tribe = board.board.get(new Position(i, j));
                 if (tribe != null) {
                     switch (tribe.name) {
@@ -126,8 +125,8 @@ public class Frame extends JFrame{
 
 
     private void drawBoard(Graphics g) {
-        for (int row = 0; row < ROWS; row++) {
-            for (int col = 0; col < COLS; col++) {
+        for (int row = 0; row < SQUARE_LENGTH; row++) {
+            for (int col = 0; col < SQUARE_LENGTH; col++) {
                 int x = col * SIZE;
                 int y = row * SIZE;
 

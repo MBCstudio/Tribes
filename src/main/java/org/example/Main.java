@@ -8,6 +8,5 @@ public class Main {
     public static void main(String[] args) throws InterruptedException {
         Init Start = new Init();
         Start.start_simulation();
-//        Frame frame = new Frame();
     }
 }

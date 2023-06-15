@@ -6,16 +6,48 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Init {
-    public static void start_simulation() throws InterruptedException {
+    public static Integer start_simulation() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
-        int width = Frame.COLS;
-        int height = Frame.ROWS;
-        Integer amount_black = 20;
-        Integer amount_white = 20;
-        Integer amount_green = 20;
-        Integer amount_yellow = 20;
-        Integer amount_purple = 20;
-        Board board = new Board(width, height);
+        int square_len; //dlugosc krawedzi kwadratu
+        Integer amount_black;
+        Integer amount_white ;
+        Integer amount_green;
+        Integer amount_yellow;
+        Integer amount_purple;
+        System.out.println("Jaka dlugosc ma miec bok kwadratu: ");
+        square_len = scanner.nextInt();
+        if (square_len<0){
+            System.out.println("Dlugosc boku planszy nie moze byc ujemana!");
+            return -2;
+        }
+        System.out.println("Ile chcesz dodac osobnikow plemnienia czarnego: ");
+        amount_black = scanner.nextInt();
+        System.out.println("Ile chcesz dodac osobnikow plemnienia bialego: ");
+        amount_white = scanner.nextInt();
+        System.out.println("Ile chcesz dodac osobnikow plemnienia zielonego: ");
+        amount_green = scanner.nextInt();
+        System.out.println("Ile chcesz dodac osobnikow plemnienia zoltego: ");
+        amount_yellow = scanner.nextInt();
+        System.out.println("Ile chcesz dodac osobnikow plemnienia fioletowego: ");
+        amount_purple = scanner.nextInt();
+        if ((square_len*square_len)<(amount_black+amount_green+amount_purple+amount_white+amount_yellow)){ //bład: ilosc jednostek na planszy przekracza ilosc pól
+            System.out.println("Podana liczba osobnikow nie miesci sie na planszy");
+            System.out.println("Liczba wszystkich osobnikow: " + (amount_black+amount_green+amount_purple+amount_white+amount_yellow));
+            System.out.println("Dostepna liczba mijesc na planszy to: " + (square_len*square_len));
+            return -1;
+        }
+        if (amount_black<0 || amount_green<0 || amount_purple<0 || amount_yellow<0 || amount_white<0) {
+            System.out.println("Liczba osobnikow nie moze byc ujemna");
+            System.out.println("Populacja plemion:");
+            System.out.println("Plemie czarnych: "+ amount_black);
+            System.out.println("Plemie bialych: " + amount_white);
+            System.out.println("Plemie zielonych: " + amount_green);
+            System.out.println("Plemie zoltych: " + amount_yellow);
+            System.out.println("Plemie bialych: " + amount_purple);
+            return -3;
+        }
+       // if (())
+        Board board = new Board(square_len, square_len);
         Map<String, Integer> tribeTypes = new HashMap();
         tribeTypes.put("black", amount_black);
         tribeTypes.put("white", amount_white);
@@ -35,9 +67,9 @@ public class Init {
             }
         }
         int counter = 0;
-        Frame frame = new Frame(board, counter, amount_black, amount_white,amount_green,amount_yellow,amount_purple);
-        frame.setMinimumSize(new Dimension(450+width*10,300+height*10));
-        frame.setSize(450+width*11,300+height*11);
+        Frame frame = new Frame(board, counter, amount_black, amount_white,amount_green,amount_yellow,amount_purple, square_len);
+        frame.setMinimumSize(new Dimension(450+square_len*10,300+square_len*10));
+        frame.setSize(450+square_len*11,300+square_len*11);
         board.displayBoard();
         System.out.println();
         //frame.pack();
@@ -48,7 +80,7 @@ public class Init {
             tribe_counter=0;
             counter++;
             List<Position> usedPositions = new ArrayList<>();//lista pozycji
-            updatedBoard = new Board(width, height);
+            updatedBoard = new Board(square_len, square_len);
             for (Map.Entry<Position, Tribe> entry : board.board.entrySet()) {
                 board.moveTribe(entry.getValue(), entry.getKey());//przesuwanie obiektów
                 int x = entry.getKey().x; //zapamietywanie nowych wspolrzednych
@@ -115,6 +147,7 @@ public class Init {
                 tribe_counter++;
             }
         };
+        return 0;
     }
 
 
