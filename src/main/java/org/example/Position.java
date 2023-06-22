@@ -21,6 +21,10 @@ public class Position {
         return y == position.y;
     }
 
+    /**
+     * Sprawdza, czy nie bedzie dwoch jednostek na tych samych pozycjach.
+     * @return
+     */
     @Override
     public int hashCode() {
         return 31 * x + y;

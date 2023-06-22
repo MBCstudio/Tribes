@@ -10,6 +10,11 @@ import java.util.concurrent.TimeUnit;
  * Głowna klasa odpowiadajaca za dzialanie programu i wywolujaca odpowiednie funkcje i metody zapewniajace dzialanie programu
  */
 public class Init {
+    /**
+     * Odpowiada za inicjalizacje calej symulacji i jej wstepne prawidlowe wyswietlanie. W tym miejscu uzytkownik podaje parametry symulacji.
+     * @return
+     * @throws InterruptedException
+     */
     public static Integer start_simulation() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         int square_len; //dlugosc krawedzi kwadratu

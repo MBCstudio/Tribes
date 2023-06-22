@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Plemie "Czarnych"
+ */
 public class Black extends Tribe {
     Black(){
         this.physical_strength = 5;

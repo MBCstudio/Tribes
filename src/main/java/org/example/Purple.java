@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * Plemie "Fioletowych"
+ */
 public class Purple extends Tribe {
     Purple(){
         this.physical_strength = 2;

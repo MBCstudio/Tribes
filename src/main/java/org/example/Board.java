@@ -13,6 +13,11 @@ public class Board {
     int height;
     Map<Position, Tribe> board = new HashMap<>();
 
+    /**
+     * konstruktor odpowiadajacy za plansze
+     * @param width
+     * @param height
+     */
     public Board(int width, int height) {
         this.width = width;
         this.height = height;
@@ -120,6 +125,9 @@ public class Board {
         return winner;
     }
 
+    /**
+     * Metoda, która odpowiada za wyświtlanie tablicy, na ktorej rozmieszczeni sa czlonkowie plemion
+     */
     public void displayBoard() {
         for (int i=0; i<height; i++){
             for (int j=0; j<width; j++) {

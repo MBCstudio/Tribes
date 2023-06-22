@@ -21,7 +21,17 @@ public class Frame extends JFrame{
     private JLabel purpleLabel;
     private JLabel counterLabel;
 
-
+    /**
+     * Odpowiada za tworzenie okna z graficznym przedstawieniem symulacji. Parametry zawierają informacje, ktore potem sa wyswietlane w odpowiedniej ramce z danymi.
+     * @param board
+     * @param counter licznik tur
+     * @param amount_black
+     * @param amount_white
+     * @param amount_green
+     * @param amount_yellow
+     * @param amount_purple
+     * @param square_len
+     */
     public Frame(Board board, int counter, int amount_black, int amount_white, int amount_green, int amount_yellow, int amount_purple, int square_len) {
         setTitle("Plansza z kwadratami");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,6 +100,16 @@ public class Frame extends JFrame{
         setVisible(true);
     }
 
+    /**
+     * Odpowiada za odswiezanie ramki
+     * @param board
+     * @param counter
+     * @param amount_black
+     * @param amount_white
+     * @param amount_green
+     * @param amount_yellow
+     * @param amount_purple
+     */
     public void updateFrame(Board board, int counter, int amount_black, int amount_white, int amount_green, int amount_yellow, int amount_purple) {
         updateBoardColors(board);
         updateData(counter,amount_black,amount_white,amount_green,amount_yellow,amount_purple);
@@ -97,6 +117,10 @@ public class Frame extends JFrame{
         repaint();
     }
 
+    /**
+     * Zmiana kolorow planszy w kazdej turze wraz z ruchem jednostek
+     * @param board
+     */
     private void updateBoardColors(Board board) {
         for (int i = 0; i < SQUARE_LENGTH; i++) {
             for (int j = 0; j < SQUARE_LENGTH; j++) {
@@ -117,6 +141,16 @@ public class Frame extends JFrame{
             }
         }
     }
+
+    /**
+     * Odswiezanie ramki z danymi symulacji
+     * @param counter
+     * @param amount_black
+     * @param amount_white
+     * @param amount_green
+     * @param amount_yellow
+     * @param amount_purple
+     */
     private void updateData(int counter, int amount_black, int amount_white, int amount_green, int amount_yellow, int amount_purple){
         whiteLabel.setText("Liczebnosc plemienia Bialych: " + amount_white);
         counterLabel.setText("Dlugosc symulacji: " + counter);
@@ -126,7 +160,10 @@ public class Frame extends JFrame{
         purpleLabel.setText("Liczebnosc plemienia Fioletowych: "+ amount_purple);
     }
 
-
+    /**
+     * Rysowanie tablicy, ktorej kolory zostaly odpowiednio przygotowane
+     * @param g
+     */
     private void drawBoard(Graphics g) {
         for (int row = 0; row < SQUARE_LENGTH; row++) {
             for (int col = 0; col < SQUARE_LENGTH; col++) {
