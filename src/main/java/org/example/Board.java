@@ -29,6 +29,10 @@ public class Board {
         this.addToBoard(tribe, position);
     }
 
+    /**
+     * metoda ograniczajaca losowane pozycje adekwatnie do rozmiaru mapy i zwracajaca losowa pozycje w tym zakresie
+     * @return Position
+     */
     private Position drawPosition() {
         Position position = Position.drawPosition(width - 1, height - 1);
         while (this.board.containsKey(position)) {
@@ -37,6 +41,11 @@ public class Board {
         return position;
     }
 
+    /**
+     * metoda dodaje obiekt plemienia do mapy dodatkowo sprawdzajaca czy jakis inny obiekt nie stoi na danym miejscu
+     * @param tribe
+     * @param position
+     */
     private void addToBoard(Tribe tribe, Position position){
         if (!this.board.containsKey(position)){
             this.board.put(position, tribe);

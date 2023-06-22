@@ -154,7 +154,11 @@ public class Init {
         return 0;
     }
 
-
+    /**
+     * metoda sprawdzajaca i zwracajaca obiekt odpowiedniego plemienia
+     * @param tribeType
+     * @return
+     */
     private static Tribe createTribe(String tribeType) {
         switch (tribeType) {
             case "black": return new Black();

@@ -1,5 +1,8 @@
 package org.example;
 
+/**
+ * klasa "parent" dla klas wszystkich plemion
+ */
 public class Tribe {
     Integer physical_strength;
     Integer iq;
@@ -14,6 +17,10 @@ public class Tribe {
     Tribe() {
     }
 
+    /**
+     * metoda zwracajaca stringa z imieniem danego plemienia aby odpowiednio wpisac je do mapy
+     * @return
+     */
     public String getName() {
         return name;
     }
