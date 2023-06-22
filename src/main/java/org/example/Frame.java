@@ -5,6 +5,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.util.Map;
 
+/**
+ * Klasa odpowiedzialna za dzialanie "Frame"
+ */
 public class Frame extends JFrame{
     static final int SIZE = 10; // Rozmiar pojedynczego kwadratu (w pikselach)
     static int SQUARE_LENGTH; // Liczba kolumn

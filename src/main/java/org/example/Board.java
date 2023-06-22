@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Klasa odpowiadajaca za funkcjonowanie planszy i zajmujaca sie mechanika znajdujacych sie na niej obiektow
+ */
 public class Board {
     int width;
     int height;
@@ -15,6 +18,10 @@ public class Board {
         this.height = height;
     }
 
+    /**
+     * metoda przypisujaca wylosowana pozycje poczatkowa dla obiektu plemienia i dodajaca ja do mapy za pomoca metody addToBoard
+     * @param tribe
+     */
     public void addTribe(Tribe tribe) {
         Position position = this.drawPosition();
         tribe.current_x = position.x;
@@ -36,6 +43,11 @@ public class Board {
         }
     }
 
+    /**
+     * metoda odpowiada za przesuwanie plemion w okreslonym kierunku
+     * @param tribe
+     * @param position
+     */
     public void moveTribe(Tribe tribe, Position position) {
         int random = RandInt.random(0, 2);
         if (RandInt.random(-100, 100) < 0){
@@ -64,6 +76,11 @@ public class Board {
         tribe.current_y = position.y;
     }
 
+    /**
+     * metoda odpowiadająca za mechanikę walki pomiędzy plemionami
+     * @param listOfFighters
+     * @return
+     */
     public Tribe tribeFight(List<Tribe> listOfFighters){
         int choice = RandInt.random(1,4);
         int max = 0;
@@ -108,6 +125,12 @@ public class Board {
         }
     }
 
+    /**
+     * Metoda odpowiadająca za ponowne umieszczenie obiektow do mapy po poruszaniu i walkach
+     * @param tribe
+     * @param x
+     * @param y
+     */
     public void newTribe (Tribe tribe, int x, int y) {
         tribe.current_x = x;
         tribe.current_y = y;

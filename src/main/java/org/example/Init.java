@@ -6,6 +6,9 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Głowna klasa odpowiadajaca za dzialanie programu i wywolujaca odpowiednie funkcje i metody zapewniajace dzialanie programu
+ */
 public class Init {
     public static Integer start_simulation() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
